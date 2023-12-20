@@ -62,7 +62,7 @@ export const Banner = () => {
               >
                 <img
                   className="banner__img"
-                  src={`img/banner/${link}.png`}
+                  src={`img/banner-${link}.png`}
                   alt={`${link} banner`}
                 />
               </Link>
