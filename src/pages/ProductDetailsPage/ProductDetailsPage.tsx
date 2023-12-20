@@ -49,9 +49,26 @@ export const ProductDetailsPage = () => {
     image,
     ram,
     name,
+    category,
   } = selectedProduct;
 
-  const [selectedImg, setSelectedImg] = useState(image);
+  const imgFormat = () => {
+    if (category === 'phones') {
+      return image.replace(/\.webp$/, '.jpg');
+    }
+
+    return image;
+  };
+
+  const imagesFormat = () => {
+    if (category === 'phones') {
+      return images.map(img => img.replace(/\.webp$/, '.jpg'));
+    }
+
+    return images;
+  };
+
+  const [selectedImg, setSelectedImg] = useState(imgFormat);
   const getBackButtonName = location.pathname.split('/')[1];
   const [currentSlide, setCurrentSlide] = useState(0);
   const length = getArrayLength(randomProducts);
@@ -59,7 +76,7 @@ export const ProductDetailsPage = () => {
   const [isColor, setIsColor] = useState(color);
 
   useEffect(() => {
-    setSelectedImg(image);
+    setSelectedImg(imgFormat);
     setIsCapacity(capacity);
     setIsColor(color);
   }, [image, capacity, color]);
@@ -137,7 +154,7 @@ export const ProductDetailsPage = () => {
             </div>
           )}
           <ul className="details__images-container">
-            {images.map((img) => (
+            {imagesFormat().map(img => (
               <li
                 key={img}
                 className={classNames(
@@ -155,7 +172,7 @@ export const ProductDetailsPage = () => {
                 >
                   <img
                     className="details__img"
-                    src={`api/${img}`}
+                    src={`/${img}`}
                     alt="img"
                   />
                 </a>
@@ -166,7 +183,7 @@ export const ProductDetailsPage = () => {
           {!isMobile && (
             <div className="details__selected-img-container">
               <img
-                src={`api/${selectedImg}`}
+                src={`/${imgFormat()}`}
                 alt="img"
                 className="details__img details__img--selected"
               />

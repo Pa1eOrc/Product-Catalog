@@ -10,7 +10,8 @@ export function getFilteredCarts(carts: Product[]): Carts[] {
       price,
       name,
       image,
-      phoneId,
+      itemId,
+      category,
     } = cart;
 
     if (filteredCarts[id]) {
@@ -22,7 +23,8 @@ export function getFilteredCarts(carts: Product[]): Carts[] {
         price,
         name,
         image,
-        phoneId,
+        itemId,
+        category,
       };
     }
   });

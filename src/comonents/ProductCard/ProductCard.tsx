@@ -20,15 +20,22 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     ram,
     category,
     image,
-    phoneId,
+    itemId,
   } = product;
   const [searchParams] = useSearchParams();
   const { isMobile } = useProducts();
   const location = useLocation();
   const link = location.pathname === '/favourites'
-    ? `/favourites/${phoneId}`
-    : `/${category}/${phoneId}`;
+    ? `/favourites/${itemId}`
+    : `/${category}/${itemId}`;
   const screenWidtch = window.innerWidth;
+  const imgFormat = () => {
+    if (category === 'phones') {
+      return image.replace(/\.webp$/, '.jpg');
+    }
+
+    return image;
+  };
 
   useEffect(() => {
     if (isMobile) {
@@ -45,7 +52,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           ) as HTMLElement;
           const imgContainerHeight = imgContainer.offsetHeight;
 
-          // console.log(elementHeight, imgContainerHeight);
           const height = imgContainerHeight - (
             elementHeight - mobileElementHeight);
 
@@ -67,8 +73,8 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       <div className="product-card__img-container">
         <img
           className="product-card__img"
-          src={`api/${image}`}
-          alt={phoneId}
+          src={`/${imgFormat()}`}
+          alt={itemId}
         />
       </div>
       <div className="product-card__container">

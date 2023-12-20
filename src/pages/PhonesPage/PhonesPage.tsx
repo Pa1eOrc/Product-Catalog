@@ -9,9 +9,9 @@ import { NoResults } from '../../comonents/NoResults';
 import { SortProducts } from '../../helpers/utils/sortProducts';
 import { NoSearchResults } from '../../comonents/NoSearchResults';
 import { BreadCrumbs } from '../../comonents/BreadCrumbs';
+import { getSearchWith } from '../../helpers/utils/getSearchWith';
 
 import '../../style/block/page.scss';
-import { getSearchWith } from '../../helpers/utils/getSearchWith';
 
 export const PhonesPage = () => {
   const {

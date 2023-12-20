@@ -19,7 +19,7 @@ export const Category = () => {
 
     if (link === 'accessories') {
       title = 'Accessories';
-      productType = 'accessoryes';
+      productType = 'accessories';
     }
 
     if (link === 'phones') {

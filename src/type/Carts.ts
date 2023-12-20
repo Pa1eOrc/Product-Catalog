@@ -4,5 +4,6 @@ export interface Carts {
   price: number,
   name: string,
   image: string,
-  phoneId: string,
+  itemId: string,
+  category: string,
 }

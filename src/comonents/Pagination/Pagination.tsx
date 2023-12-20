@@ -34,13 +34,8 @@ export const Pagination: React.FC<Props> = ({
 
     return [isPrevDisabledValue, isNextDisabledValue, isPrevValue, isNextValue];
   }, [currentPage, pageCount.length, totalLength]);
-  const pageCountCurrent = pageCountFunction(pageCount, currentPage);
-
-  // useEffect(() => {
-  //   if (isPrevDisabled) {
-  //     setSearchParams(getSearchWith(searchParams, { page: null }));
-  //   }
-  // }, [isPrevDisabled]);
+  const pageCountCurrent = pageCount.length < 4
+    ? pageCount : pageCountFunction(pageCount, currentPage);
 
   return (
     <ul className="pagination" data-cy="pagination">

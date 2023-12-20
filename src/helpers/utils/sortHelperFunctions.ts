@@ -19,10 +19,6 @@ export function sortProductsByAbsoluteDiscount(products: Product[]): Product[] {
   });
 }
 
-// export function filterProductsWithoutDiscount(products: Product[]): Product[] {
-//   return products.filter(product => product.fullPrice === product.price);
-// }
-
 export function filterProductsByAge(products: Product[]): Product[] {
   return products.sort((productA: Product, productB: Product) => {
     return productB.year - productA.year;

@@ -9,5 +9,5 @@ const url = '/products.json';
 export async function getAccessories() {
   const data = await client.get<Product[]>(url);
 
-  return filterProductsByCategory(data, 'accessoryes');
+  return filterProductsByCategory(data, 'accessories');
 }

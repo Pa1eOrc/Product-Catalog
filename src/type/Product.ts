@@ -3,7 +3,7 @@ export interface Product {
   price: number,
   year: number,
   id: string,
-  phoneId: string,
+  itemId: string,
   capacity: string,
   name: string,
   image: string,

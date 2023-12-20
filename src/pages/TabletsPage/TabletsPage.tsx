@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Loader } from '../../comonents/Loader';
 import { Dropdown } from '../../comonents/Dropdown';
 import { Pagination } from '../../comonents/Pagination';
@@ -7,6 +9,7 @@ import { NoResults } from '../../comonents/NoResults';
 import { SortProducts } from '../../helpers/utils/sortProducts';
 import { NoSearchResults } from '../../comonents/NoSearchResults';
 import { BreadCrumbs } from '../../comonents/BreadCrumbs';
+import { getSearchWith } from '../../helpers/utils/getSearchWith';
 
 import '../../style/block/page.scss';
 
@@ -24,6 +27,8 @@ export const TabletsPage = () => {
     isLoading,
     tablets,
     isError,
+    prevSearch,
+    setPrevSearch,
   } = useProducts();
   const sortedTablets = SortProducts(tablets, sort, query);
   const totalLength = sortedTablets.length;
@@ -33,6 +38,7 @@ export const TabletsPage = () => {
   const productsForCurrentPage = sortedTablets.slice(
     startIndex, startIndex + perPageToNum,
   );
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const renderContext = () => {
     if (!isLoading && tablets.length === 0) {
@@ -51,6 +57,30 @@ export const TabletsPage = () => {
       <ProductList productsForCurrentPage={productsForCurrentPage} />
     );
   };
+
+  useEffect(() => {
+    if (page === 1) {
+      setSearchParams(getSearchWith(searchParams, { page: null }));
+    }
+  }, [page, searchParams]);
+
+  useEffect(() => {
+    if (query) {
+      setSearchParams(getSearchWith(searchParams, { page: null }));
+    }
+
+    if (!query && sort === prevSearch.sort && perPage === prevSearch.perPage) {
+      setSearchParams(getSearchWith(
+        searchParams, { page: prevSearch.page.toString() },
+      ));
+    }
+  }, [query, sort, perPage]);
+
+  useEffect(() => {
+    if (!query) {
+      setPrevSearch({ page, sort, perPage });
+    }
+  }, [query, sort, perPage, page]);
 
   return (
     <section className="page">

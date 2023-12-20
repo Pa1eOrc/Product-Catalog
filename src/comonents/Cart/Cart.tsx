@@ -19,10 +19,18 @@ export const Cart: React.FC<Props> = ({
     price,
     count,
     image,
-    phoneId,
+    itemId,
+    category,
   } = cart;
 
   const totalPrice = price * count;
+  const imgFormat = () => {
+    if (category === 'phones') {
+      return image.replace(/\.webp$/, '.jpg');
+    }
+
+    return image;
+  };
 
   return (
     <section className="cart" key={id}>
@@ -40,8 +48,8 @@ export const Cart: React.FC<Props> = ({
         </div>
         <div className="cart__img-container">
           <img
-            src={`api/${image}`}
-            alt={phoneId}
+            src={`/${imgFormat()}`}
+            alt={itemId}
             className="cart__img"
           />
         </div>

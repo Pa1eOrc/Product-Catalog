@@ -4,8 +4,13 @@
 .carts {
   position: relative;
   padding: 0 0 56px;
-  max-width: 1200px;
+  width: 100vw;
+  flex: 1;
   margin: 0 auto;
+
+  @include onDesctop {
+    width: 1200px;
+  }
 
   @include onTablet {
     padding: 0 0 64px;
@@ -30,6 +35,7 @@
   &__main-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 32px;
     padding: 24px 16px 0;
 

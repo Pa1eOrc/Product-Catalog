@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { getProductDetails } from '../../comonents/api/productDetails';
+import { getProductsDetails } from '../../comonents/api/productDetails';
 import { Product } from '../../type/Product';
 import { ProductDeatails } from '../../type/ProductDetails';
 
@@ -37,26 +37,28 @@ export const fetchDetails = async (
   if (selectedProductId) {
     setIsLoading(true);
     setIsError('');
+    const foundProduct = products.find(
+      (p) => p.itemId === selectedProductId,
+    );
 
-    try {
-      const data = await getProductDetails(selectedProductId);
+    if (foundProduct) {
+      try {
+        const data = await getProductsDetails(foundProduct.category);
+        const details = data.find(p => p.id === selectedProductId);
 
-      setProductDetails(data);
-      const foundProduct = products.find(
-        (p) => p.phoneId === selectedProductId,
-      );
-
-      if (foundProduct) {
-        setIsProductNotFound(false);
-        setSelectedProduct(foundProduct);
-      } else {
-        setIsProductNotFound(true);
+        if (details) {
+          setIsProductNotFound(false);
+          setProductDetails(details);
+          setSelectedProduct(foundProduct);
+        } else {
+          setIsProductNotFound(true);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsError(`Error fetching ${name}`);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setIsError(`Error fetching ${name}`);
-    } finally {
-      setIsLoading(false);
     }
   }
 };
