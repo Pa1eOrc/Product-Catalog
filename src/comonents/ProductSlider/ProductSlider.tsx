@@ -22,7 +22,9 @@ export const ProductSlider: React.FC<Props> = ({
 
     if (action === 'prev' && currentSlide > 0) {
       newSlide = currentSlide - 1;
-    } else if (action === 'next' && currentSlide < length) {
+    }
+
+    if (action === 'next' && currentSlide < length) {
       newSlide = currentSlide + 1;
     }
 
@@ -37,7 +39,7 @@ export const ProductSlider: React.FC<Props> = ({
   );
 
   return (
-    <div className="product-slider container">
+    <div className="product-slider">
       {buttons.map(action => (
         <button
           key={action}

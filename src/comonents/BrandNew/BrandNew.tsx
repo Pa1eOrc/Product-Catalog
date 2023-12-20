@@ -9,9 +9,11 @@ export const BrandNew = () => {
   const length = getArrayLength(newBrandProducts);
 
   return (
-    <>
+    <section className="home-page__brand-new">
       <div className="container">
-        <h1 className="text text--h1">Brand new models</h1>
+        <h1 className="text text--h2">
+          Brand new models
+        </h1>
 
         <ProductSlider
           currentSlide={currentBrandNewSlide}
@@ -25,6 +27,6 @@ export const BrandNew = () => {
         currentSlide={currentBrandNewSlide}
         id="brand-new"
       />
-    </>
+    </section>
   );
 };

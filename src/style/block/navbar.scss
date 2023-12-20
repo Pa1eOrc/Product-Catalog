@@ -1,18 +1,67 @@
 .navbar {
+  height: calc(100vh - 48px);
+  padding-top: 32px;
+
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 24px;
+
+  @include onTablet {
+    padding: 0;
+    flex-direction: row;
+    gap: 32px;
+    height: 48px;
+  }
+
+  @include onDesctop {
+    height: 64px;
+  }
+
+  &__left-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__right-container {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    width: 100vw;
+
+    border-top: 1px solid $elements;
+
+    &::after {
+      position: absolute;
+      content: "";
+      height: 64px;
+      width: 1px;
+      background-color: $elements;
+    }
+  }
 
   &__item {
-    padding: 28px 20px 24px;
+    padding: 8px;
+    width: min-content;
+    transition: all 0.3s ease-in-out;
+
+    @include onTablet {
+      height: min-content;
+      padding: 21px 8px 8px;
+    }
+
+    @include onDesctop {
+      padding: 28px 16px 24px;
+    }
+
     color: $secondary;
     font-size: 12px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 11px;
     letter-spacing: 0.48px;
     text-transform: uppercase;
-    vertical-align: middle;
+    text-align: center;
     position: relative;
 
     &--icon {
@@ -20,47 +69,77 @@
       justify-content: center;
       align-items: center;
       width: 64px;
-      height: 63px;
-      padding: 0;
+      height: 64px;
       position: relative;
-      border-left: 1px solid $elements;
 
       &:hover {
         background-color: $hover;
+        box-shadow: inset 0 0 1px 0 $primary;
+      }
+
+      @include onTablet {
+        width: 48px;
+        height: 47px;
+        padding: 0;
+        border-left: 1px solid $elements;
+      }
+
+      @include onDesctop {
+        width: 64px;
+        height: 63px;
       }
     }
   }
 
   &__link {
     display: flex;
-    align-items: center;
-    height: min-content;
+    justify-content: center;
 
-    &--active > .navbar__item {
+    &--active > .navbar__item--link {
       color: $primary;
 
       &::after {
         position: absolute;
-        top: 61px;
-        left: 20px;
-        right: 20px;
+        top: 25px;
+        left: 8px;
+        right: 8px;
         content: "";
-        height: 3px;
+        height: 2px;
         background-color: $primary;
         pointer-events: none;
         z-index: 1;
-      }
 
-      &--icon::after {
-        position: absolute;
-        top: 61px;
-        left: -1px;
-        right: 0;
-        content: "";
-        height: 3px;
-        background-color: $primary;
-        pointer-events: none;
-        z-index: 1;
+        @include onTablet {
+          top: 46px;
+        }
+
+        @include onDesctop {
+          height: 3px;
+          top: 61px;
+          left: 16px;
+          right: 16px;
+        }
+      }
+    }
+
+    &--active > .navbar__item--icon {
+      @include onTablet {
+        &::after {
+          position: absolute;
+          top: 46px;
+          left: 0;
+          right: 0;
+          content: "";
+          height: 2px;
+          background-color: $primary;
+          pointer-events: none;
+          z-index: 1;
+
+          @include onDesctop {
+            height: 3px;
+            top: 61px;
+          }
+        }
       }
     }
 
@@ -81,5 +160,15 @@
     font-size: 9px;
     text-align: center;
     line-height: 15px;
+
+    @include onTablet {
+      top: 10px;
+      right: 10px;
+    }
+
+    @include onDesctop {
+      top: 16px;
+      right: 16px;
+    }
   }
 }

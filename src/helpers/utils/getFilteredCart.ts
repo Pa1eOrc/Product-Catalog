@@ -8,8 +8,9 @@ export function getFilteredCarts(carts: Product[]): Carts[] {
     const {
       id,
       price,
-      discount,
       name,
+      image,
+      phoneId,
     } = cart;
 
     if (filteredCarts[id]) {
@@ -19,8 +20,9 @@ export function getFilteredCarts(carts: Product[]): Carts[] {
         id,
         count: 1,
         price,
-        discount,
         name,
+        image,
+        phoneId,
       };
     }
   });

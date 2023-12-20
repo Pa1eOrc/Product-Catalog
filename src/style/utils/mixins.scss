@@ -1,0 +1,29 @@
+@mixin onMobile {
+  @media (max-width: 639px) {
+    @content;
+  }
+}
+
+@mixin onTablet {
+  @media (min-width: 640px) {
+    @content;
+  }
+}
+
+@mixin onDesctop {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin grid2 {
+  @media (min-width: 470px) {
+    @content;
+  }
+}
+
+@mixin grid3 {
+  @media (min-width: 768px) {
+    @content;
+  }
+}

@@ -11,7 +11,10 @@ export const ProductList: React.FC<Props> = ({ productsForCurrentPage }) => {
   return (
     <ul className="product-list" data-cy="productList">
       {productsForCurrentPage.map(product => (
-        <li key={product.id}>
+        <li
+          key={product.id}
+          className="product-list__item"
+        >
           <ProductCard product={product} />
         </li>
       ))}

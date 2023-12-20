@@ -44,7 +44,7 @@ export const AccessoriesPage = () => {
     }
 
     if (query && sortedAccessories.length === 0) {
-      return <NoSearchResults />;
+      return <NoSearchResults category="accessories" />;
     }
 
     return (

@@ -1,9 +1,10 @@
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Product } from '../../type/Product';
 import { Button } from '../Button';
 
 import './ProductCard.scss';
+import { useProducts } from '../ProductContext';
 
 type Props = {
   product: Product
@@ -12,23 +13,47 @@ type Props = {
 export const ProductCard: React.FC<Props> = ({ product }) => {
   const {
     name,
-    id,
     price,
-    discount,
+    fullPrice,
     screen,
     capacity,
     ram,
-    type,
+    category,
+    image,
+    phoneId,
   } = product;
-
-  const priceWithDiscount = useMemo(
-    () => price - (price * discount) / 100, [price, discount],
-  );
   const [searchParams] = useSearchParams();
+  const { isMobile } = useProducts();
   const location = useLocation();
   const link = location.pathname === '/favourites'
-    ? `/favourites/${id}`
-    : `/${type}s/${id}`;
+    ? `/favourites/${phoneId}`
+    : `/${category}/${phoneId}`;
+  const screenWidtch = window.innerWidth;
+
+  useEffect(() => {
+    if (isMobile) {
+      const productCard = document.querySelectorAll('.product-card');
+      const mobileElementHeight = 440;
+
+      productCard.forEach(p => {
+        const element = p as HTMLElement;
+        const elementHeight = element.offsetHeight;
+
+        if (elementHeight > mobileElementHeight) {
+          const imgContainer = element.querySelector(
+            '.product-card__img-container',
+          ) as HTMLElement;
+          const imgContainerHeight = imgContainer.offsetHeight;
+
+          // console.log(elementHeight, imgContainerHeight);
+          const height = imgContainerHeight - (
+            elementHeight - mobileElementHeight);
+
+          imgContainer.style.height = (`${height}px`);
+        }
+      });
+    }
+  }, [screenWidtch]);
 
   return (
     <Link
@@ -39,45 +64,45 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       data-cy="cardsContainer"
       className="product-card"
     >
-      <img
-        className="product-card__img"
-        // src={`img/products/${id}.0.jpg`}
-        alt={id}
-      />
+      <div className="product-card__img-container">
+        <img
+          className="product-card__img"
+          src={`api/${image}`}
+          alt={phoneId}
+        />
+      </div>
       <div className="product-card__container">
         <p className="text product-card__title">{name}</p>
 
         <div
           className="product-card__price-container"
         >
-          <h2 className="text text--h2">
-            {`$${priceWithDiscount}`}
+          <h2 className="text text--price">
+            {`$${price}`}
           </h2>
-          {discount > 0 && (
-            <h2
-              className="text text--h2-strikethrough"
-            >
-              {`$${price}`}
-            </h2>
-          )}
+          <h2
+            className="text text--h2-strikethrough"
+          >
+            {`$${fullPrice}`}
+          </h2>
         </div>
 
         <div className="product-card__info-container">
-          <div className="container">
+          <div className="product-card__info">
             <p className="text text--small text--gray">
               Screen
             </p>
             <p className="text text--small">{screen}</p>
           </div>
 
-          <div className="container">
+          <div className="product-card__info">
             <p className="text text--small text--gray">
               Capacity
             </p>
             <p className="text text--small">{capacity}</p>
           </div>
 
-          <div className="container">
+          <div className="product-card__info">
             <p className="text text--small text--gray">
               RAM
             </p>

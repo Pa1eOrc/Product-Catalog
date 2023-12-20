@@ -9,9 +9,9 @@ export const HotPrices = () => {
   const length = getArrayLength(hotPriceProducts);
 
   return (
-    <>
+    <section className="home-page__hot-price">
       <div className="container">
-        <h1 className="text text--h1">Hot prices</h1>
+        <h1 className="text text--h2">Hot prices</h1>
 
         <ProductSlider
           currentSlide={currentHotPriceSlide}
@@ -25,6 +25,6 @@ export const HotPrices = () => {
         currentSlide={currentHotPriceSlide}
         id="hot-price"
       />
-    </>
+    </section>
   );
 };

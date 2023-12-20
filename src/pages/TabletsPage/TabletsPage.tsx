@@ -44,7 +44,7 @@ export const TabletsPage = () => {
     }
 
     if (query && sortedTablets.length === 0) {
-      return <NoSearchResults />;
+      return <NoSearchResults category="tablets" />;
     }
 
     return (

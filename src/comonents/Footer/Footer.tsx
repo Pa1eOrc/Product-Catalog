@@ -14,14 +14,13 @@ export const Footer = () => {
       <Link
         to="/"
         title="Back to home page"
-        className="icon icon--logo"
-        onClick={handleButtonClick}
+        className="icon icon--footer-logo"
       />
 
-      <div className="container footer__link-container">
+      <div className="footer__link-container">
         <Link
-          className="text text--small text--gray"
-          to="https://github.com/Pa1eOrc/react_phone-catalog"
+          className="text text--small text--gray footer__link"
+          to="https://github.com/Pa1eOrc/product_catalog"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -29,13 +28,13 @@ export const Footer = () => {
         </Link>
         <Link
           to="/"
-          className="text text--small text--gray"
+          className="text text--small text--gray footer__link"
         >
           Contacts
         </Link>
         <Link
           to="/"
-          className="text text--small text--gray"
+          className="text text--small text--gray footer__link"
         >
           Rights
         </Link>

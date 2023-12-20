@@ -1,4 +1,5 @@
 @import "../../style/utils/vars.scss";
+@import "../../style/utils/mixins.scss";
 
 .dropdown {
   display: flex;
@@ -28,12 +29,14 @@
       border-color: $secondary;
     }
 
-    &--sort {
-      width: 176px;
-    }
+    @include onTablet {
+      &--sort {
+        width: 187px;
+      }
 
-    &--perPage {
-      width: 128px;
+      &--perPage {
+        width: 136px;
+      }
     }
   }
 

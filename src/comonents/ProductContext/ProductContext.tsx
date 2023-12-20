@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Product } from '../../type/Product';
 import * as ProductClient from '../api/products';
@@ -11,7 +11,7 @@ import { ProductDeatails } from '../../type/ProductDetails';
 import { useLocalStorage } from '../../helpers/localStorage/useLocalStorage';
 import { fetchProducts, fetchDetails } from '../../helpers/fetch/fetchClient';
 import { filterProductsById }
-  from '../../helpers/functions/sortHelperFunctions';
+  from '../../helpers/utils/sortHelperFunctions';
 
 type Props = {
   children: React.ReactNode;
@@ -63,6 +63,8 @@ type ProductsContextProps = {
   }) => void,
   isMessage: boolean,
   setIsMessage: (isMessage: boolean) => void,
+  isMobile: boolean,
+  screenWidth: number,
 };
 
 export const ProductsContext = React.createContext<ProductsContextProps>({
@@ -93,35 +95,39 @@ export const ProductsContext = React.createContext<ProductsContextProps>({
   accessories: [],
   setCurrentOption: () => '',
   productDetails: {
-    android: {
-      os: '',
-    },
-    battery: {
-      type: '',
-    },
-    camera: {
-      primary: '',
-    },
-    description: '',
-    display: {
-      screenResolution: '',
-    },
     id: '',
+    capacityAvailable: [],
+    colorsAvailable: [],
+    color: '',
+    capacity: '',
+    namespaceId: '',
     images: [],
-    name: '',
+    description: [
+      {
+        title: '',
+        text: [],
+      },
+    ],
+    resolution: '',
+    processor: '',
+    camera: '',
+    zoom: '',
+    cell: [],
   },
   selectedProductId: '',
   setSelectedProductId: () => '',
   selectedProduct: {
-    type: '',
+    fullPrice: 0,
     price: 0,
-    discount: 0,
-    age: 0,
+    year: 0,
     id: '',
-    screen: '',
+    phoneId: '',
     capacity: '',
-    ram: '',
     name: '',
+    image: '',
+    category: '',
+    screen: '',
+    ram: '',
   },
   getArrayLength: () => 0,
   carts: [],
@@ -141,6 +147,8 @@ export const ProductsContext = React.createContext<ProductsContextProps>({
   setPrevSearch: () => { },
   isMessage: false,
   setIsMessage: () => {},
+  isMobile: false,
+  screenWidth: 1040,
 });
 
 export const ProductsProvider: React.FC<Props> = ({ children }) => {
@@ -156,6 +164,24 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
   const links = ['phones', 'tablets', 'accessories', 'favourites'];
   const [isError, setIsError] = useState('');
   const [isMessage, setIsMessage] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.outerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.outerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const mobileScreen = 639;
+  const isMobile = useMemo(() => {
+    return screenWidth <= mobileScreen;
+  }, [screenWidth, mobileScreen]);
 
   useEffect(() => {
     fetchProducts(
@@ -194,33 +220,37 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
   const count = 8;
   const [selectedProductId, setSelectedProductId] = useState('');
   const [productDetails, setProductDetails] = useState<ProductDeatails>({
-    android: {
-      os: '',
-    },
-    battery: {
-      type: '',
-    },
-    camera: {
-      primary: '',
-    },
-    description: '',
-    display: {
-      screenResolution: '',
-    },
     id: '',
+    capacityAvailable: [],
+    colorsAvailable: [],
+    color: '',
+    capacity: '',
+    namespaceId: '',
     images: [],
-    name: '',
+    description: [
+      {
+        title: '',
+        text: [],
+      },
+    ],
+    resolution: '',
+    processor: '',
+    camera: '',
+    zoom: '',
+    cell: [],
   });
   const [selectedProduct, setSelectedProduct] = useState<Product>({
-    type: '',
+    fullPrice: 0,
     price: 0,
-    discount: 0,
-    age: 0,
+    year: 0,
     id: '',
-    screen: '',
+    phoneId: '',
     capacity: '',
-    ram: '',
     name: '',
+    image: '',
+    category: '',
+    screen: '',
+    ram: '',
   });
   const [randomProducts, setRandomProducts] = useState<Product[]>([]);
   const [isProductNotFound, setIsProductNotFound] = useState(false);
@@ -376,6 +406,8 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
     setPrevSearch,
     isMessage,
     setIsMessage,
+    isMobile,
+    screenWidth,
   };
 
   return (

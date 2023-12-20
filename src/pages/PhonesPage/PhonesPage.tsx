@@ -50,7 +50,7 @@ export const PhonesPage = () => {
     }
 
     if (query && sortedPhones.length === 0) {
-      return <NoSearchResults />;
+      return <NoSearchResults category="phones" />;
     }
 
     return (

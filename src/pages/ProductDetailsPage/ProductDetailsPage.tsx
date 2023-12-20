@@ -22,40 +22,47 @@ export const ProductDetailsPage = () => {
     randomProducts,
     getArrayLength,
     isProductNotFound,
+    isMobile,
   } = useProducts();
-  const [imgIndex, setImgIndex] = useState(0);
   const { productId } = useParams();
   const { state } = useLocation();
   const location = useLocation();
 
   const {
-    android,
-    battery,
-    camera,
-    description,
-    display,
-    id,
+    capacityAvailable,
+    colorsAvailable,
     images,
+    description,
+    resolution,
+    processor,
+    camera,
+    zoom,
+    cell,
+    color,
+    capacity,
   } = productDetails;
-
-  const { os } = android;
-  const { type } = battery;
-  const { primary } = camera;
-  const { screenResolution } = display;
 
   const {
     price,
-    discount,
+    fullPrice,
     screen,
-    capacity,
+    image,
     ram,
     name,
   } = selectedProduct;
 
-  const priceWithDiscount = price - (price * discount) / 100;
+  const [selectedImg, setSelectedImg] = useState(image);
   const getBackButtonName = location.pathname.split('/')[1];
   const [currentSlide, setCurrentSlide] = useState(0);
   const length = getArrayLength(randomProducts);
+  const [isCapacity, setIsCapacity] = useState(capacity);
+  const [isColor, setIsColor] = useState(color);
+
+  useEffect(() => {
+    setSelectedImg(image);
+    setIsCapacity(capacity);
+    setIsColor(color);
+  }, [image, capacity, color]);
 
   useEffect(() => {
     if (productId) {
@@ -67,9 +74,9 @@ export const ProductDetailsPage = () => {
     };
   }, [productId, setSelectedProductId]);
 
-  const handleImageClick = (e: React.MouseEvent, index: number) => {
+  const handleImageClick = (e: React.MouseEvent, img: string) => {
     e.preventDefault();
-    setImgIndex(index);
+    setSelectedImg(img);
   };
 
   const renderContext = () => {
@@ -115,31 +122,40 @@ export const ProductDetailsPage = () => {
 
         <BackButton />
 
-        <h1 className="details__title text text--h1">
+        <h1 className="details__title text text--h2">
           {name.toLowerCase()}
         </h1>
 
         <section className="details__main-container">
+          {isMobile && (
+            <div className="details__selected-img-container">
+              <img
+                src={`api/${selectedImg}`}
+                alt="img"
+                className="details__img details__img--selected"
+              />
+            </div>
+          )}
           <ul className="details__images-container">
-            {images.map((img, index) => (
+            {images.map((img) => (
               <li
                 key={img}
                 className={classNames(
                   'details__image-container',
                   {
                     'details__image-container--selected':
-                      imgIndex === index,
+                      selectedImg === img,
                   },
                 )}
               >
                 <a
                   href="/"
                   type="button"
-                  onClick={(e) => handleImageClick(e, index)}
+                  onClick={(e) => handleImageClick(e, img)}
                 >
                   <img
                     className="details__img"
-                    src={`img/products/${id}.${index}.jpg`}
+                    src={`api/${img}`}
                     alt="img"
                   />
                 </a>
@@ -147,28 +163,35 @@ export const ProductDetailsPage = () => {
             ))}
           </ul>
 
-          <div className="details__selected-img-container">
-            <img
-              src={`img/products/${productDetails.id}.${imgIndex}.jpg`}
-              alt="img"
-              className="details__img details__img--selected"
-            />
-          </div>
+          {!isMobile && (
+            <div className="details__selected-img-container">
+              <img
+                src={`api/${selectedImg}`}
+                alt="img"
+                className="details__img details__img--selected"
+              />
+            </div>
+          )}
 
           <div className="details__inner-container">
-            <Option />
+            <Option
+              capacityAvailable={capacityAvailable}
+              colorsAvailable={colorsAvailable}
+              isCapacity={isCapacity}
+              setIsCapacity={setIsCapacity}
+              isColor={isColor}
+              setIsColor={setIsColor}
+            />
 
             <div className="details__info-container">
               <div className="details__price-container">
-                {discount > 0 && (
-                  <p className="text text--h1">{`$${priceWithDiscount}`}</p>
-                )}
+                <p className="text text--h2">{`$${fullPrice}`}</p>
 
                 <p className={classNames(
                   'text',
-                  'text--h1',
-                  { 'text--h2-strikethrough': discount > 0 },
-                  { 'text--gray': discount > 0 },
+                  'text--h2',
+                  'text--h2-strikethrough',
+                  'text--gray',
                 )}
                 >
                   {`$${price}`}
@@ -194,20 +217,20 @@ export const ProductDetailsPage = () => {
                     Resolution
                   </p>
                   <p className="text text--small">
-                    {screenResolution}
+                    {resolution}
                   </p>
                 </li>
                 <li className="details__info">
                   <p className="text text--gray text--small">
-                    OS
+                    Processor
                   </p>
                   <p className="text text--small">
-                    {os}
+                    {processor}
                   </p>
                 </li>
                 <li className="details__info">
                   <p className="text text--gray text--small">
-                    Ram
+                    RAM
                   </p>
                   <p className="text text--small">
                     {ram}
@@ -221,17 +244,18 @@ export const ProductDetailsPage = () => {
         <About
           description={description}
           screen={screen}
-          screenResolution={screenResolution}
-          os={os}
+          resolution={resolution}
+          processor={processor}
           ram={ram}
-          type={type}
-          primary={primary}
           capacity={capacity}
+          camera={camera}
+          zoom={zoom}
+          cell={cell}
         />
 
         <div className="details__carousel-container">
-          <div className="container">
-            <h2>You may also like</h2>
+          <div className="details__carousel-top">
+            <h2 className="text text--h2">You may also like</h2>
             <ProductSlider
               currentSlide={currentSlide}
               setCurrentSlide={setCurrentSlide}

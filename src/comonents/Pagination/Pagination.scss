@@ -1,11 +1,11 @@
 @import "../../style/utils/vars.scss";
 
 .pagination {
-  padding-top: 40px;
+  padding-top: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 16px;
 
   &__item {
     display: flex;
@@ -16,6 +16,16 @@
       border-color: $elements;
       pointer-events: none;
     }
+  }
+
+  &__inner-list {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__inner-item {
+    width: 32px;
+    height: 32px;
   }
 
   &__link {

@@ -17,7 +17,7 @@ export const FavouritesPage = () => {
     }
 
     if (query && sortedFavourites.length === 0) {
-      return <NoSearchResults />;
+      return <NoSearchResults category="favourites" />;
     }
 
     return <ProductList productsForCurrentPage={sortedFavourites} />;

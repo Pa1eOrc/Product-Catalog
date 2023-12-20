@@ -1,14 +1,32 @@
 @import "../../style/utils/vars.scss";
+@import "../../style/utils/mixins.scss";
 
 .details {
-  padding: 0 152px;
+  padding: 0 0 56px;
+  width: 100vw;
   text-transform: capitalize;
+  flex: 1;
+  margin: 0 auto;
+
+  @include onDesctop {
+    width: 1200px;
+    padding: 0 0 24px;
+  }
 
   &__bread-crumbs {
     padding-top: 24px;
     display: flex;
     align-items: center;
     gap: 8px;
+    padding-left: 16px;
+
+    @include onTablet {
+      padding-left: 24px;
+    }
+
+    @include onDesctop {
+      padding-left: 32px;
+    }
 
     & > a:hover {
       color: $secondary;
@@ -16,27 +34,68 @@
   }
 
   &__title {
-    padding-top: 16px;
+    padding: 16px 16px 0;
+
+    @include onTablet {
+      padding: 16px 24px 0;
+    }
+
+    @include onDesctop {
+      padding: 16px 32px 0;
+    }
   }
 
   &__main-container {
-    padding-top: 40px;
+    padding: 32px 16px 0;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include onTablet {
+      padding: 40px 24px 0;
+      flex-direction: row;
+      align-items: start;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    @include onDesctop {
+      padding: 40px 32px 0;
+      justify-content: start;
+    }
   }
 
   &__images-container {
-    width: 80px;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-right: 16px;
+    gap: 8px;
+    padding-top: 16px;
+
+    @include onTablet {
+      flex-direction: column;
+      padding: 0;
+    }
+
+    @include onDesctop {
+      width: 80px;
+      padding-right: 16px;
+    }
   }
 
   &__image-container {
-    width: 80px;
-    height: 80px;
+    height: 49px;
+    width: 51px;
     padding: 7px;
     border: 1px solid $elements;
+
+    @include onTablet {
+      height: 35px;
+      width: 35px;
+    }
+
+    @include onDesctop {
+      width: 80px;
+      height: 80px;
+    }
 
     &--selected {
       border-color: $secondary;
@@ -51,6 +110,7 @@
     width: 100%;
     height: 100%;
     transition: all 0.5s ease-in-out;
+    object-fit: contain;
 
     &--selected:hover {
       transform: scale(105%);
@@ -58,14 +118,32 @@
   }
 
   &__selected-img-container {
-    width: 464px;
-    height: 464px;
-    padding: 11px;
+    width: 275px;
+    height: 275px;
+
     box-sizing: border-box;
+
+    @include onTablet {
+      width: 287px;
+      height: 287px;
+    }
+
+    @include onDesctop {
+      width: 464px;
+      height: 464px;
+    }
   }
 
   &__inner-container {
-    padding-left: 64px;
+    padding: 40px 16px 0;
+
+    @include onTablet {
+      padding: 0;
+    }
+
+    @include onDesctop {
+      padding-left: 64px;
+    }
   }
 
   &__price-container {
@@ -87,6 +165,28 @@
   }
 
   &__carousel-container {
-    padding-top: 80px;
+    padding: 56px 0 0;
+
+    @include onTablet {
+      padding: 64px 0 0;
+    }
+
+    @include onDesctop {
+      padding: 80px 16px 0;
+    }
+  }
+
+  &__carousel-top {
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+
+    @include onTablet {
+      padding: 0 24px;
+    }
+
+    @include onDesctop {
+      padding: 0 16px;
+    }
   }
 }

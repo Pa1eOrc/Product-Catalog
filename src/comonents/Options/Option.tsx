@@ -1,11 +1,24 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import './Option.scss';
 import classNames from 'classnames';
 
-export const Option = () => {
-  const [isCapacity, setIsCapacity] = useState('64');
-  const [isColor, setIsColor] = useState('red');
+type Props = {
+  capacityAvailable: string[],
+  colorsAvailable: string[],
+  isCapacity: string,
+  setIsCapacity: (isCapacity: string) => void,
+  isColor: string,
+  setIsColor: (isColor: string) => void,
+};
 
+export const Option: React.FC<Props> = ({
+  capacityAvailable,
+  colorsAvailable,
+  isCapacity,
+  setIsCapacity,
+  isColor,
+  setIsColor,
+}) => {
   const handleCapacityChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsCapacity(e.target.value);
   };
@@ -21,55 +34,32 @@ export const Option = () => {
           Available colors
         </p>
         <div className="options__select-container">
-          <label className={classNames(
-            'options__color-label',
-            { 'options__color-label--selected': isColor === 'red' },
-          )}
-          >
-            <input
-              type="radio"
-              name="color"
-              value="red"
-              title="red"
-              className="options__input"
-              onChange={handleColorCahange}
-            />
-            <span className="options__color options__color--red" />
-          </label>
-
-          <label
-            className={classNames(
-              'options__color-label',
-              { 'options__color-label--selected': isColor === 'green' },
-            )}
-          >
-            <input
-              type="radio"
-              name="color"
-              value="green"
-              title="green"
-              className="options__input"
-              onChange={handleColorCahange}
-            />
-            <span className="options__color options__color--green" />
-          </label>
-
-          <label
-            className={classNames(
-              'options__color-label',
-              { 'options__color-label--selected': isColor === 'sec' },
-            )}
-          >
-            <input
-              type="radio"
-              name="color"
-              value="sec"
-              title="sec"
-              className="options__input"
-              onChange={handleColorCahange}
-            />
-            <span className="options__color options__color--sec" />
-          </label>
+          {colorsAvailable.map(color => {
+            return (
+              <label
+                key={color}
+                className={classNames(
+                  'options__color-label',
+                  { 'options__color-label--selected': isColor === color },
+                )}
+              >
+                <input
+                  type="radio"
+                  name="color"
+                  value={color}
+                  title={color}
+                  className="options__input"
+                  onChange={handleColorCahange}
+                />
+                <span
+                  className={classNames(
+                    'options__color',
+                    `options__color--${color}`,
+                  )}
+                />
+              </label>
+            );
+          })}
         </div>
       </div>
 
@@ -78,56 +68,25 @@ export const Option = () => {
           Select capacity
         </p>
         <div className="options__select-container">
-          <label
-            className={classNames(
-              'options__capacity',
-              'text',
-              { 'options__capacity--selected': isCapacity === '64' },
-            )}
-          >
-            <input
-              className="options__input"
-              type="radio"
-              name="capacity"
-              value="64"
-              onChange={handleCapacityChange}
-            />
-            64 gb
-          </label>
-
-          <label
-            className={classNames(
-              'options__capacity',
-              'text',
-              { 'options__capacity--selected': isCapacity === '256' },
-            )}
-          >
-            <input
-              className="options__input"
-              type="radio"
-              name="capacity"
-              value="256"
-              onChange={handleCapacityChange}
-            />
-            256 gb
-          </label>
-
-          <label
-            className={classNames(
-              'options__capacity',
-              'text',
-              { 'options__capacity--selected': isCapacity === '512' },
-            )}
-          >
-            <input
-              className="options__input"
-              type="radio"
-              name="capacity"
-              value="512"
-              onChange={handleCapacityChange}
-            />
-            512 gb
-          </label>
+          {capacityAvailable.map(capacity => (
+            <label
+              key={capacity}
+              className={classNames(
+                'options__capacity',
+                'text',
+                { 'options__capacity--selected': isCapacity === capacity },
+              )}
+            >
+              <input
+                className="options__input"
+                type="radio"
+                name="capacity"
+                value={capacity}
+                onChange={handleCapacityChange}
+              />
+              {`${capacity}`}
+            </label>
+          ))}
         </div>
       </div>
     </div>

@@ -1,0 +1,48 @@
+.grid {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat($grid-desctop, 1fr);
+  gap: 16px;
+
+  @include onTablet {
+    grid-template-columns: repeat($grid-tablet, 1fr);
+  }
+
+  @include onDesctop {
+    grid-template-columns: repeat($grid-desctop, 1fr);
+  }
+
+  &__item {
+    width: 100%;
+
+    @include onMobile {
+      @for $start from 1 through $grid-mobile {
+        @for $end from $start through $grid-mobile {
+          &--mobile-#{$start}-#{$end} {
+            grid-column: #{$start} / #{$end + 1};
+          }
+        }
+      }
+
+      @include onTablet {
+        @for $start from 1 through $grid-tablet {
+          @for $end from $start through $grid-tablet {
+            &--tablet-#{$start}-#{$end} {
+              grid-column: #{$start} / #{$end + 1};
+            }
+          }
+        }
+
+        @include onDesctop {
+          @for $start from 1 through $grid-desctop {
+            @for $end from $start through $grid-desctop {
+              &--desctop-#{$start}-#{$end} {
+                grid-column: #{$start} / #{$end + 1};
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,13 +2,11 @@ import { Link } from 'react-router-dom';
 import { useProducts } from '../ProductContext';
 
 import './Category.scss';
+import { filterProductsByCategory }
+  from '../../helpers/utils/sortHelperFunctions';
 
 export const Category = () => {
   const { links, products } = useProducts();
-
-  const filterProductsByType = (productType: string) => {
-    return products.filter(product => product.type === productType);
-  };
 
   const renderContext = (link: string) => {
     let title = '';
@@ -16,20 +14,20 @@ export const Category = () => {
 
     if (link === 'tablets') {
       title = 'Tablets';
-      productType = 'tablet';
+      productType = 'tablets';
     }
 
     if (link === 'accessories') {
       title = 'Accessories';
-      productType = 'accessory';
+      productType = 'accessoryes';
     }
 
     if (link === 'phones') {
       title = 'Mobile phones';
-      productType = 'phone';
+      productType = 'phones';
     }
 
-    const filteredProducts = filterProductsByType(productType);
+    const filteredProducts = filterProductsByCategory(products, productType);
 
     return (
       <>
@@ -42,8 +40,8 @@ export const Category = () => {
   };
 
   return (
-    <>
-      <h1 className="text text--h1">
+    <section className="home-page__category category">
+      <h1 className="text text--h2">
         Shop by category
       </h1>
 
@@ -61,6 +59,7 @@ export const Category = () => {
               <img
                 src={`img/category/${link}.png`}
                 alt="category"
+                className="category__img"
               />
             </Link>
 
@@ -70,6 +69,6 @@ export const Category = () => {
           </li>
         ))}
       </ul>
-    </>
+    </section>
   );
 };

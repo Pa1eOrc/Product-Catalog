@@ -1,18 +1,18 @@
 export type ProductDeatails = {
-  android: {
-    os: string,
-  },
-  battery: {
-    type: string,
-  },
-  camera: {
-    primary: string,
-  },
-  description: string,
-  display: {
-    screenResolution: string,
-  },
   id: string,
+  capacityAvailable: string[],
+  colorsAvailable: string[],
+  color: string,
+  capacity: string,
+  namespaceId: string,
   images: string[],
-  name: string,
+  description: {
+    title: string;
+    text: string[];
+  }[];
+  resolution: string,
+  processor: string,
+  camera: string,
+  zoom: string,
+  cell: string[],
 };

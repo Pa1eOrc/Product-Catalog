@@ -1,4 +1,5 @@
 import { Product } from '../../type/Product';
+import { calculateDiscountPercentage } from './calculateDiscountPercentage';
 
 export function SortProducts(products: Product[], sort: string, query: string) {
   let sortedProducts: Product[] = [];
@@ -6,7 +7,7 @@ export function SortProducts(products: Product[], sort: string, query: string) {
   switch (sort) {
     case 'age':
       sortedProducts = [...products].sort(
-        (productA, productB) => productA.age - productB.age,
+        (productA, productB) => productA.year - productB.year,
       );
       break;
 
@@ -19,12 +20,14 @@ export function SortProducts(products: Product[], sort: string, query: string) {
     case 'price':
       sortedProducts = [...products].sort(
         (productA, productB) => {
-          const absoluteDiscountA = productA.price - (
-            productA.price * productA.discount) / 100;
-          const absoluteDiscountB = productB.price - (
-            productB.price * productB.discount) / 100;
+          const absoluteDiscountA = calculateDiscountPercentage(
+            productA.fullPrice, productA.price,
+          );
+          const absoluteDiscountB = calculateDiscountPercentage(
+            productB.fullPrice, productB.price,
+          );
 
-          return absoluteDiscountA - absoluteDiscountB;
+          return +absoluteDiscountA - +absoluteDiscountB;
         },
       );
       break;

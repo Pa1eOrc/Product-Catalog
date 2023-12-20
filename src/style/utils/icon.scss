@@ -2,6 +2,7 @@
   display: flex;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: contain;
   width: 16px;
   height: 16px;
   cursor: pointer;
@@ -9,8 +10,29 @@
 
   &--logo {
     background-image: url(../../img/Icons/Logo.svg);
-    width: 40px;
-    height: 24px;
+    width: 64px;
+    height: 22px;
+
+    @include onDesctop {
+      width: 80px;
+      height: 27px;
+    }
+  }
+
+  &--footer-logo {
+    background-image: url(../../img/Icons/Logo.svg);
+    width: 89px;
+    height: 32px;
+  }
+
+  &--menu {
+    background-image: url(../../img/Icons/menu.svg);
+    width: 16px;
+    height: 16px;
+
+    &:hover {
+      background-image: url(../../img/Icons/menu_hover.svg);
+    }
   }
 
   &--arrow {

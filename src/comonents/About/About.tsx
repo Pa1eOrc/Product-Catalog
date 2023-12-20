@@ -1,25 +1,30 @@
 import './About.scss';
 
 type Props = {
-  description: string,
+  description: {
+    title: string;
+    text: string[];
+  }[];
   screen: string,
-  screenResolution: string,
-  os: string,
+  resolution: string,
+  processor: string,
   ram: string,
-  type: string,
-  primary: string,
   capacity: string,
+  camera: string,
+  zoom: string,
+  cell: string[],
 };
 
 export const About: React.FC<Props> = ({
   description,
   screen,
-  screenResolution,
-  os,
+  resolution,
+  processor,
   ram,
-  type,
-  primary,
   capacity,
+  camera,
+  zoom,
+  cell,
 }) => {
   return (
     <div className="about">
@@ -28,12 +33,16 @@ export const About: React.FC<Props> = ({
           About
         </h2>
 
-        <div
-          className="about__text text"
-          data-cy="productDescription"
-        >
-          {description}
-        </div>
+        {description.map(element => {
+          const { title, text } = element;
+
+          return (
+            <div key={element.title} className="about__description-container">
+              <p className="about__description-title">{title}</p>
+              <p className="about__text text">{text}</p>
+            </div>
+          );
+        })}
       </div>
 
       <div className="about__tech">
@@ -49,31 +58,35 @@ export const About: React.FC<Props> = ({
             <p className="text text--gray">
               Resolution
             </p>
-            <p className="text">{screenResolution}</p>
+            <p className="text">{resolution}</p>
           </li>
           <li className="about__info">
-            <p className="text text--gray">OS</p>
-            <p className="text">{os}</p>
+            <p className="text text--gray">Processor</p>
+            <p className="text">{processor}</p>
           </li>
           <li className="about__info">
-            <p className="text text--gray">Ram</p>
+            <p className="text text--gray">RAM</p>
             <p className="text">{ram}</p>
           </li>
           <li className="about__info">
             <p className="text text--gray">
-              Battery
+              Built in memory
             </p>
             <p className="text">
-              {type}
+              {capacity}
             </p>
           </li>
           <li className="about__info">
             <p className="text text--gray">Camera</p>
-            <p className="text">{primary}</p>
+            <p className="text">{camera}</p>
           </li>
           <li className="about__info">
-            <p className="text text--gray">Capacity</p>
-            <p className="text">{capacity}</p>
+            <p className="text text--gray">Zoom</p>
+            <p className="text">{zoom}</p>
+          </li>
+          <li className="about__info">
+            <p className="text text--gray">Cell</p>
+            <p className="text">{cell.slice(0, 4).join(', ')}</p>
           </li>
         </ul>
       </div>

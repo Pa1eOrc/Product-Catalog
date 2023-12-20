@@ -1,5 +1,5 @@
 import { Product } from '../../type/Product';
-import * as sortFunction from '../../helpers/functions/sortHelperFunctions';
+import * as sortFunction from '../../helpers/utils/sortHelperFunctions';
 import { client } from '../../helpers/fetch/httpClient';
 
 export function getProducts() {
@@ -15,12 +15,12 @@ export const getHotPriceProducts = (products: Product[]) => {
 };
 
 export const getBrandNewProducts = (products: Product[]) => {
-  const filteredProducts = sortFunction
-    .filterProductsWithoutDiscount(products);
-  const sortedProducts = sortFunction
-    .sortProductsByPrice(filteredProducts);
+  const filteredProductsByAge = sortFunction
+    .filterProductsByAge(products);
+  const filteredProductsByPrice = sortFunction
+    .sortProductsByPrice(filteredProductsByAge);
 
-  return sortedProducts;
+  return filteredProductsByPrice;
 };
 
 export const getSuggestedProducts = (

@@ -1,17 +1,64 @@
-.home-page {
-  width: 1440px;
-  padding: 0 152px;
+@import "../../style/utils/mixins.scss";
 
-  &__banner {
-    padding-top: 40px;
+.home-page {
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+
+  @include onTablet {
+    padding: 0 24px;
+  }
+
+  @include onDesctop {
+    max-width: 1200px;
+    padding: 0;
+  }
+
+  &__title {
+    padding: 24px 16px;
+
+    @include onTablet {
+      padding: 32px 0;
+    }
+
+    @include onDesctop {
+      padding: 56px 32px;
+    }
+  }
+
+  &__brand-new {
+    padding: 56px 0 0;
+
+    @include onTablet {
+      padding: 64px 0 0;
+    }
+
+    @include onDesctop {
+      padding: 80px 16px 0;
+    }
+  }
+
+  &__category {
+    padding: 56px 16px;
+
+    @include onTablet {
+      padding: 0;
+    }
+
+    @include onDesctop {
+      padding: 0 32px;
+    }
   }
 
   &__hot-price {
-    padding-top: 72px;
-  }
+    padding: 56px 0 64px;
 
-  &__brand-new,
-  &__category {
-    padding-top: 80px;
+    @include onTablet {
+      padding: 56px 0 0;
+    }
+
+    @include onDesctop {
+      padding: 56px 16px 16px;
+    }
   }
 }

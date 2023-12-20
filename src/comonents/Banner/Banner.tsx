@@ -7,7 +7,7 @@ import { useProducts } from '../ProductContext';
 import './Banner.scss';
 
 export const Banner = () => {
-  const { links } = useProducts();
+  const { links, isMobile } = useProducts();
   const [activeSlide, setActiveSlide] = useState(0);
   const totalSlides = links.slice(0, 3).length;
 
@@ -34,16 +34,18 @@ export const Banner = () => {
   }, [activeSlide]);
 
   return (
-    <section className="banner">
+    <section className="home-page__banner banner">
       <div className="banner__carousel-container">
-        <button
-          type="button"
-          className="banner__arrow"
-          title="arrow"
-          onClick={() => handleButtonClick('prev')}
-        >
-          <span className="icon icon--arrow icon--prev" />
-        </button>
+        {!isMobile && (
+          <button
+            type="button"
+            className="banner__arrow"
+            title="arrow"
+            onClick={() => handleButtonClick('prev')}
+          >
+            <span className="icon icon--arrow icon--prev" />
+          </button>
+        )}
 
         <ul className="banner__carousel">
           {links.slice(0, 3).map((link, index) => (
@@ -68,17 +70,19 @@ export const Banner = () => {
           ))}
         </ul>
 
-        <button
-          type="button"
-          className="banner__arrow"
-          title="arrow"
-          onClick={() => handleButtonClick('next')}
-        >
-          <span className="icon icon--arrow icon--next" />
-        </button>
+        {!isMobile && (
+          <button
+            type="button"
+            className="banner__arrow"
+            title="arrow"
+            onClick={() => handleButtonClick('next')}
+          >
+            <span className="icon icon--arrow icon--next" />
+          </button>
+        )}
       </div>
 
-      <div className="banner__dot-container container">
+      <div className="banner__dot-container">
         <span
           className={classNames(
             'banner__dot',

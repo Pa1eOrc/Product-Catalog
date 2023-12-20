@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-len
-const BASE_URL = 'https://mate-academy.github.io/react_phone-catalog/api';
+const BASE_URL = 'https://pa1eorc.github.io/Product-Catalog/api/';
 
 function wait(delay: number) {
   return new Promise(resolve => {

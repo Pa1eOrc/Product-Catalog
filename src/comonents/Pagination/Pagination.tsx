@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { getSearchWith } from '../../helpers/utils/getSearchWith';
 
 import './Pagination.scss';
+import { pageCountFunction } from '../../helpers/utils/pageCountFunction';
 
 type Props = {
   currentPage: number,
@@ -33,6 +34,7 @@ export const Pagination: React.FC<Props> = ({
 
     return [isPrevDisabledValue, isNextDisabledValue, isPrevValue, isNextValue];
   }, [currentPage, pageCount.length, totalLength]);
+  const pageCountCurrent = pageCountFunction(pageCount, currentPage);
 
   // useEffect(() => {
   //   if (isPrevDisabled) {
@@ -68,26 +70,30 @@ export const Pagination: React.FC<Props> = ({
         </Link>
       </li>
 
-      {pageCount.map(page => (
-        <li
-          key={page}
-          className="pagination__item"
-        >
-          <Link
-            to={{
-              search: getSearchWith(
-                searchParams, { page: page.toString() },
-              ),
-            }}
-            className={classNames(
-              'pagination__link',
-              { 'pagination__link--active': page === currentPage },
-            )}
-          >
-            {page}
-          </Link>
-        </li>
-      ))}
+      <li>
+        <ul className="pagination__inner-list">
+          {pageCountCurrent.map(page => (
+            <li
+              className="pagination__inner-item"
+              key={page}
+            >
+              <Link
+                to={{
+                  search: getSearchWith(
+                    searchParams, { page: page.toString() },
+                  ),
+                }}
+                className={classNames(
+                  'pagination__link',
+                  { 'pagination__link--active': page === currentPage },
+                )}
+              >
+                {page}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </li>
 
       <li className={classNames(
         'pagination__item',

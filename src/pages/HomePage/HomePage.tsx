@@ -11,7 +11,7 @@ export const HomePage = () => {
   const { isLoading, isError } = useProducts();
 
   return (
-    <div className="home-page">
+    <main className="home-page">
       {isLoading ? (
         <Loader />
       ) : (
@@ -20,25 +20,21 @@ export const HomePage = () => {
             <h1>{isError}</h1>
           ) : (
             <>
-              <section className="home-page__banner banner">
-                <Banner />
-              </section>
+              <h1 className="home-page__title text text--h1">
+                Welcome to Nice Gadgets store!
+              </h1>
 
-              <section className="home-page__hot-price">
-                <HotPrices />
-              </section>
+              <Banner />
 
-              <section className="home-page__category category">
-                <Category />
-              </section>
+              <BrandNew />
 
-              <section className="home-page__brand-new">
-                <BrandNew />
-              </section>
+              <Category />
+
+              <HotPrices />
             </>
           )}
         </>
       )}
-    </div>
+    </main>
   );
 };

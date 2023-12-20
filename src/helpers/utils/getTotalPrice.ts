@@ -2,7 +2,7 @@ import { Product } from '../../type/Product';
 
 export function getTotalPrice(carts: Product[]) {
   const priceMap = carts.map(
-    cart => cart.price - (cart.price * cart.discount) / 100,
+    cart => cart.price,
   );
 
   const totalPrice = priceMap.reduce((acc, value) => {

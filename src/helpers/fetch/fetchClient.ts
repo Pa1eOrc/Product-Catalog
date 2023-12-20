@@ -42,7 +42,9 @@ export const fetchDetails = async (
       const data = await getProductDetails(selectedProductId);
 
       setProductDetails(data);
-      const foundProduct = products.find((p) => p.id === selectedProductId);
+      const foundProduct = products.find(
+        (p) => p.phoneId === selectedProductId,
+      );
 
       if (foundProduct) {
         setIsProductNotFound(false);

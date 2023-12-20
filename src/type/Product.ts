@@ -1,11 +1,13 @@
 export interface Product {
-  type: string,
+  fullPrice: number,
   price: number,
-  discount: number,
-  age: number,
+  year: number,
   id: string,
-  screen: string,
+  phoneId: string,
   capacity: string,
-  ram: string,
   name: string,
+  image: string,
+  category: string,
+  screen: string,
+  ram: string,
 }
