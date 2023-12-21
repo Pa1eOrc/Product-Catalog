@@ -1,10 +1,9 @@
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Product } from '../../type/Product';
 import { Button } from '../Button';
 
 import './ProductCard.scss';
-import { useProducts } from '../ProductContext';
 
 type Props = {
   product: Product
@@ -23,7 +22,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     itemId,
   } = product;
   const [searchParams] = useSearchParams();
-  const { isMobile } = useProducts();
   const location = useLocation();
   const link = location.pathname === '/favourites'
     ? `/favourites/${itemId}`
@@ -35,30 +33,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
     return image;
   };
-
-  useEffect(() => {
-    if (isMobile) {
-      const productCard = document.querySelectorAll('.product-card');
-      const mobileElementHeight = 440;
-
-      productCard.forEach(p => {
-        const element = p as HTMLElement;
-        const elementHeight = element.offsetHeight;
-
-        if (elementHeight > mobileElementHeight) {
-          const imgContainer = element.querySelector(
-            '.product-card__img-container',
-          ) as HTMLElement;
-          const imgContainerHeight = imgContainer.offsetHeight;
-
-          const height = imgContainerHeight - (
-            elementHeight - mobileElementHeight);
-
-          imgContainer.style.height = (`${height}px`);
-        }
-      });
-    }
-  }, [isMobile]);
 
   return (
     <Link
@@ -72,7 +46,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       <div className="product-card__img-container">
         <img
           className="product-card__img"
-          src={`/${imgFormat()}`}
+          src={`${imgFormat()}`}
           alt={itemId}
         />
       </div>

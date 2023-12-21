@@ -48,7 +48,7 @@ export const Cart: React.FC<Props> = ({
         </div>
         <div className="cart__img-container">
           <img
-            src={`/${imgFormat()}`}
+            src={`${imgFormat()}`}
             alt={itemId}
             className="cart__img"
           />
