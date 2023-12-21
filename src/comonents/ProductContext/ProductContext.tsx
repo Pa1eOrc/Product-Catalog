@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Product } from '../../type/Product';
 import * as ProductClient from '../api/products';
@@ -179,9 +179,7 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
   }, []);
 
   const mobileScreen = 639;
-  const isMobile = useMemo(() => {
-    return screenWidth <= mobileScreen;
-  }, [screenWidth, mobileScreen]);
+  const isMobile = screenWidth <= mobileScreen;
 
   useEffect(() => {
     fetchProducts(
