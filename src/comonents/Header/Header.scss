@@ -3,6 +3,7 @@
 
 .header {
   height: 48px;
+  width: 100%;
 
   @include onTablet {
     display: flex;
