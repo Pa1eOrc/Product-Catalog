@@ -35,6 +35,8 @@ export const Option: React.FC<Props> = ({
         </p>
         <div className="options__select-container">
           {colorsAvailable.map(color => {
+            const transformedColor = color.replace(/\s/g, '');
+
             return (
               <label
                 key={color}
@@ -54,7 +56,7 @@ export const Option: React.FC<Props> = ({
                 <span
                   className={classNames(
                     'options__color',
-                    `options__color--${color}`,
+                    `options__color--${transformedColor}`,
                   )}
                 />
               </label>

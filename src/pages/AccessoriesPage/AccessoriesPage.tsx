@@ -82,6 +82,10 @@ export const AccessoriesPage = () => {
     }
   }, [query, sort, perPage, page]);
 
+  useEffect(() => {
+    setSearchParams(getSearchWith(searchParams, { page: null }));
+  }, []);
+
   return (
     <section className="page">
       <BreadCrumbs linkName="Accessories" />

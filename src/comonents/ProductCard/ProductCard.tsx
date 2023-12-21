@@ -28,7 +28,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const link = location.pathname === '/favourites'
     ? `/favourites/${itemId}`
     : `/${category}/${itemId}`;
-  const screenWidtch = window.innerWidth;
   const imgFormat = () => {
     if (category === 'phones') {
       return image.replace(/\.webp$/, '.jpg');
@@ -59,7 +58,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
         }
       });
     }
-  }, [screenWidtch]);
+  }, [isMobile]);
 
   return (
     <Link

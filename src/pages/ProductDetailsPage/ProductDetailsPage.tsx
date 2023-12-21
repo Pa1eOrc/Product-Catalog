@@ -147,7 +147,7 @@ export const ProductDetailsPage = () => {
           {isMobile && (
             <div className="details__selected-img-container">
               <img
-                src={`api/${selectedImg}`}
+                src={`/${selectedImg}`}
                 alt="img"
                 className="details__img details__img--selected"
               />
@@ -183,7 +183,7 @@ export const ProductDetailsPage = () => {
           {!isMobile && (
             <div className="details__selected-img-container">
               <img
-                src={`/${imgFormat()}`}
+                src={`/${selectedImg}`}
                 alt="img"
                 className="details__img details__img--selected"
               />

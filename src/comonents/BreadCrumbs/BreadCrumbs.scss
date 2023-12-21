@@ -6,4 +6,8 @@
   gap: 8px;
   height: 16px;
   box-sizing: content-box;
+
+  &__text {
+    padding-top: 2px;
+  }
 }

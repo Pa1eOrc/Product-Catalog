@@ -12,7 +12,6 @@ import { useLocalStorage } from '../../helpers/localStorage/useLocalStorage';
 import { fetchProducts, fetchDetails } from '../../helpers/fetch/fetchClient';
 import { filterProductsById }
   from '../../helpers/utils/sortHelperFunctions';
-import { getSearchWith } from '../../helpers/utils/getSearchWith';
 
 type Props = {
   children: React.ReactNode;
@@ -154,7 +153,7 @@ export const ProductsContext = React.createContext<ProductsContextProps>({
 
 export const ProductsProvider: React.FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const location = useLocation();
   const [hotPriceProducts, setHotPriceProducts] = useState<Product[]>([]);
   const [newBrandProducts, setNewBrandProducts] = useState<Product[]>([]);
@@ -335,10 +334,6 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
 
     return foundKey || '';
   }
-
-  useEffect(() => {
-    setSearchParams(getSearchWith(searchParams, { page: null }));
-  }, [location.pathname]);
 
   useEffect(() => {
     setIsLoading(true);
