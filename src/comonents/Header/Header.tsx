@@ -38,6 +38,18 @@ export const Header = () => {
     { 'navbar__link--active': isActive },
   );
 
+  const handleMenuClick = () => {
+    if (isMobile) {
+      setIsMenu(!isMenu);
+    }
+  };
+
+  useEffect(() => {
+    if (!isMobile) {
+      setIsMenu(false);
+    }
+  }, [isMobile]);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState(query);
 
@@ -65,164 +77,90 @@ export const Header = () => {
     setInputValue(query);
   }, [query]);
 
-  const renderContext = () => {
-    if (isMobile) {
-      return (
-        <>
-          <div className="header__container">
-            <NavLink to="/" title="Back to home page">
-              <span className="icon icon--logo" />
-            </NavLink>
+  return (
+    <header className="header">
+      <div className="header__container">
+        <NavLink
+          to="/"
+          title="Back to home page"
+          className="header__logo"
+          onClick={handleMenuClick}
+        >
+          <span className="icon icon--logo" />
+        </NavLink>
 
-            <button
-              type="button"
-              title="menu"
-              className="header__menu-button"
-              onClick={() => {
-                setIsMenu(!isMenu);
-              }}
-            >
-              <span className={classNames(
-                'icon',
-                { 'icon--cross': isMenu },
-                { 'icon--menu': !isMenu },
-              )}
-              />
-            </button>
-          </div>
-
-          <div className={classNames(
-            'header__navbar',
-            { 'header__navbar--active': isMenu },
+        <button
+          type="button"
+          className="header__menu-button"
+          title="menu"
+          onClick={handleMenuClick}
+        >
+          <span className={classNames(
+            'icon',
+            { 'icon--menu': !isMenu },
+            { 'icon--cross': isMenu },
           )}
+          />
+        </button>
+      </div>
+
+      <nav className={classNames(
+        'navbar',
+        { 'navbar--active': isMobile && isMenu },
+      )}
+      >
+        <div className="navbar__first-container">
+          <NavLink
+            to="/"
+            className={getLinkClass}
+            onClick={handleMenuClick}
           >
-            <nav className="navbar">
-              <div className="navbar__left-container">
-                <NavLink
-                  to="/"
-                  className={getLinkClass}
-                  onClick={() => setIsMenu(false)}
-                >
-                  <p className="navbar__item navbar__item--link">
-                    Home
-                  </p>
-                </NavLink>
+            <p className="navbar__item navbar__item--link">
+              Home
+            </p>
+          </NavLink>
 
-                <NavLink
-                  to="/phones"
-                  className={getLinkClass}
-                  onClick={() => setIsMenu(false)}
-                >
-                  <p className="navbar__item navbar__item--link">
-                    Phones
-                  </p>
-                </NavLink>
+          <NavLink
+            to="/phones"
+            className={getLinkClass}
+            onClick={handleMenuClick}
+          >
+            <p className="navbar__item navbar__item--link">
+              Phones
+            </p>
+          </NavLink>
 
-                <NavLink
-                  to="/tablets"
-                  className={getLinkClass}
-                  onClick={() => setIsMenu(false)}
-                >
-                  <p className="navbar__item navbar__item--link">
-                    Tablets
-                  </p>
-                </NavLink>
+          <NavLink
+            to="/tablets"
+            className={getLinkClass}
+            onClick={handleMenuClick}
+          >
+            <p className="navbar__item navbar__item--link">
+              Tablets
+            </p>
+          </NavLink>
 
-                <NavLink
-                  to="/accessories"
-                  className={getLinkClass}
-                  onClick={() => setIsMenu(false)}
-                >
-                  <p className="navbar__item navbar__item--link">
-                    Accessories
-                  </p>
-                </NavLink>
-              </div>
-
-              <div className="navbar__right-container">
-                <NavLink
-                  to="/favourites"
-                  className={getLinkClass}
-                  onClick={() => setIsMenu(false)}
-                >
-                  <div className="navbar__item navbar__item--icon">
-                    <span className="icon icon--favourites" />
-                    {favourites.length > 0 && (
-                      <span className="navbar__quantity">
-                        {favourites.length}
-                      </span>
-                    )}
-                  </div>
-                </NavLink>
-
-                <NavLink
-                  to="/cart"
-                  className={getLinkClass}
-                  onClick={() => setIsMenu(false)}
-                >
-                  <div className="navbar__item navbar__item--icon">
-                    <span className="icon icon--cart" />
-                    {carts.length > 0 && (
-                      <span className="navbar__quantity">
-                        {carts.length}
-                      </span>
-                    )}
-                  </div>
-                </NavLink>
-              </div>
-            </nav>
-          </div>
-        </>
-      );
-    }
-
-    return (
-      <>
-        <div className="header__container">
-          <div className="header__logo-container">
-            <NavLink to="/" title="Back to home page">
-              <span className="icon icon--logo" />
-            </NavLink>
-          </div>
-
-          <nav className="navbar">
-            <NavLink to="/" className={getLinkClass}>
-              <p className="navbar__item navbar__item--link">
-                Home
-              </p>
-            </NavLink>
-
-            <NavLink to="/phones" className={getLinkClass}>
-              <p className="navbar__item navbar__item--link">
-                Phones
-              </p>
-            </NavLink>
-
-            <NavLink to="/tablets" className={getLinkClass}>
-              <p className="navbar__item navbar__item--link">
-                Tablets
-              </p>
-            </NavLink>
-
-            <NavLink to="/accessories" className={getLinkClass}>
-              <p className="navbar__item navbar__item--link">
-                Accessories
-              </p>
-            </NavLink>
-          </nav>
+          <NavLink
+            to="/accessories"
+            className={getLinkClass}
+            onClick={handleMenuClick}
+          >
+            <p className="navbar__item navbar__item--link">
+              Accessories
+            </p>
+          </NavLink>
         </div>
 
-        <div className="header__container">
+        <div className="navbar__second-container">
           {!isCartPage
             && !isHomePage
             && !isProductDetailsPage
-            && !isMobile
             && (
-              <label className="header__search-container">
+              <label className="navbar__search-container">
                 <input
                   type="search"
                   placeholder={`Search in ${getPlaceholderText}...`}
-                  className="header__search"
+                  className="navbar__search"
                   value={inputValue}
                   onChange={handleInputChange}
                 />
@@ -234,7 +172,7 @@ export const Header = () => {
                     onClick={clearInput}
                     type="submit"
                     title="clear imput"
-                    className="header__clear-button"
+                    className="navbar__clear-button"
                     data-cy="searchDelete"
                   >
                     <span className="icon icon--cross" />
@@ -246,6 +184,7 @@ export const Header = () => {
           <NavLink
             to="/favourites"
             className={getLinkClass}
+            onClick={handleMenuClick}
           >
             <div className="navbar__item navbar__item--icon">
               <span className="icon icon--favourites" />
@@ -260,6 +199,7 @@ export const Header = () => {
           <NavLink
             to="/cart"
             className={getLinkClass}
+            onClick={handleMenuClick}
           >
             <div className="navbar__item navbar__item--icon">
               <span className="icon icon--cart" />
@@ -271,13 +211,7 @@ export const Header = () => {
             </div>
           </NavLink>
         </div>
-      </>
-    );
-  };
-
-  return (
-    <header className="header">
-      {renderContext()}
+      </nav>
     </header>
   );
 };

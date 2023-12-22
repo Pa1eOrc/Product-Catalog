@@ -2,11 +2,11 @@
 
 .product-list {
   display: grid;
+  justify-content: center;
   grid-template-columns: 1fr;
   gap: 40px;
 
   @include grid2 {
-    justify-content: center;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px 16px;
   }
@@ -22,9 +22,5 @@
   &__item {
     display: flex;
     justify-content: center;
-
-    @include grid2 {
-      justify-content: flex-start;
-    }
   }
 }

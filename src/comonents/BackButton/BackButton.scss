@@ -18,7 +18,11 @@
     border: none;
     background-color: $white;
     color: $secondary;
-    padding-top: 2px;
+    padding: 2px 0 0 4px;
+
+    @include onDesctop {
+      padding: 0 0 0 4px;
+    }
 
     &:hover {
       color: $primary;

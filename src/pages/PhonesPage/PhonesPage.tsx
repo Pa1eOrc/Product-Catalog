@@ -29,6 +29,8 @@ export const PhonesPage = () => {
     isError,
     prevSearch,
     setPrevSearch,
+    prevLocation,
+    setPrevLocation,
   } = useProducts();
   const sortedPhones = SortProducts(phones, sort, query);
   const totalLength = sortedPhones.length;
@@ -83,8 +85,13 @@ export const PhonesPage = () => {
   }, [query, sort, perPage, page]);
 
   useEffect(() => {
-    setSearchParams(getSearchWith(searchParams, { page: null }));
-  }, []);
+    if (prevLocation.includes('phones') || !prevLocation) {
+      setPrevLocation('phones');
+    } else {
+      setSearchParams(getSearchWith(searchParams, { page: null }));
+      setPrevLocation('phones');
+    }
+  }, [prevLocation]);
 
   return (
     <section className="page">

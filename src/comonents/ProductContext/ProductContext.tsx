@@ -65,6 +65,8 @@ type ProductsContextProps = {
   setIsMessage: (isMessage: boolean) => void,
   isMobile: boolean,
   screenWidth: number,
+  prevLocation: string,
+  setPrevLocation: (prevLocation: string) => void,
 };
 
 export const ProductsContext = React.createContext<ProductsContextProps>({
@@ -149,6 +151,8 @@ export const ProductsContext = React.createContext<ProductsContextProps>({
   setIsMessage: () => {},
   isMobile: false,
   screenWidth: 1040,
+  prevLocation: '',
+  setPrevLocation: () => {},
 });
 
 export const ProductsProvider: React.FC<Props> = ({ children }) => {
@@ -305,6 +309,7 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
     page: 1,
     perPage: '',
   });
+  const [prevLocation, setPrevLocation] = useState('');
 
   function getArrayLength(array: Product[]) {
     return array.length - itemsPerPage;
@@ -406,6 +411,8 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
     setIsMessage,
     isMobile,
     screenWidth,
+    prevLocation,
+    setPrevLocation,
   };
 
   return (

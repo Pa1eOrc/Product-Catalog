@@ -41,7 +41,7 @@ export const FavouritesPage = () => {
         </p>
       )}
 
-      <div className="page__fav-container">
+      <div className="page__main-container page__main-container--fav">
         {renderContext()}
       </div>
     </section>

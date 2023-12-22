@@ -29,6 +29,8 @@ export const AccessoriesPage = () => {
     isError,
     prevSearch,
     setPrevSearch,
+    prevLocation,
+    setPrevLocation,
   } = useProducts();
   const sortedAccessories = SortProducts(accessories, sort, query);
   const totalLength = sortedAccessories.length;
@@ -83,8 +85,13 @@ export const AccessoriesPage = () => {
   }, [query, sort, perPage, page]);
 
   useEffect(() => {
-    setSearchParams(getSearchWith(searchParams, { page: null }));
-  }, []);
+    if (prevLocation.includes('accessories') || !prevLocation) {
+      setPrevLocation('accessories');
+    } else {
+      setSearchParams(getSearchWith(searchParams, { page: null }));
+      setPrevLocation('accessories');
+    }
+  }, [prevLocation]);
 
   return (
     <section className="page">

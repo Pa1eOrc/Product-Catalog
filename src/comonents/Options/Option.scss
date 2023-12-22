@@ -17,10 +17,13 @@
     padding-top: 8px;
     display: flex;
     gap: 8px;
+    box-sizing: border-box;
   }
 
   &__color-label {
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -38,11 +41,8 @@
   }
 
   &__color {
-    position: absolute;
-    top: 1px;
-    bottom: 1px;
-    left: 1px;
-    right: 1px;
+    width: 26px;
+    height: 26px;
     display: flex;
     border-radius: 50%;
     border: 1px solid $elements;

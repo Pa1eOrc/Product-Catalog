@@ -29,6 +29,8 @@ export const TabletsPage = () => {
     isError,
     prevSearch,
     setPrevSearch,
+    prevLocation,
+    setPrevLocation,
   } = useProducts();
   const sortedTablets = SortProducts(tablets, sort, query);
   const totalLength = sortedTablets.length;
@@ -83,8 +85,13 @@ export const TabletsPage = () => {
   }, [query, sort, perPage, page]);
 
   useEffect(() => {
-    setSearchParams(getSearchWith(searchParams, { page: null }));
-  }, []);
+    if (prevLocation.includes('tablets') || !prevLocation) {
+      setPrevLocation('tablets');
+    } else {
+      setSearchParams(getSearchWith(searchParams, { page: null }));
+      setPrevLocation('tablets');
+    }
+  }, [prevLocation]);
 
   return (
     <section className="page">
