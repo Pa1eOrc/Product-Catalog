@@ -25,11 +25,17 @@
     }
 
     @include onDesctop {
-      padding-left: 32px;
+      padding: 22px 0 0 32px;
     }
 
     & > a:hover {
       color: $secondary;
+    }
+  }
+
+  &__bread-crumbs-text {
+    @include onDesctop {
+      padding-top: 2px;
     }
   }
 

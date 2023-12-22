@@ -125,14 +125,16 @@ export const ProductDetailsPage = () => {
               pathname: '..',
               search: state?.search,
             }}
-            className="text text--small"
+            className="text text--small details__bread-crumbs-text"
           >
             {getBackButtonName}
           </Link>
 
           <span className="icon icon--arrow-dis icon--next" />
 
-          <p className="text text--small text--gray">
+          <p className="
+            text text--small text--gray details__bread-crumbs-text"
+          >
             {name.toLowerCase()}
           </p>
         </div>

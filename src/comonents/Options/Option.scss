@@ -14,16 +14,14 @@
   }
 
   &__select-container {
+    width: 100%;
     padding-top: 8px;
     display: flex;
     gap: 8px;
-    box-sizing: border-box;
   }
 
   &__color-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -41,11 +39,13 @@
   }
 
   &__color {
-    width: 26px;
-    height: 26px;
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
     display: flex;
     border-radius: 50%;
-    border: 1px solid $elements;
 
     &--black {
       background-color: #000;
@@ -69,6 +69,7 @@
 
     &--white {
       background-color: #fff;
+      border: 1px solid $elements;
     }
 
     &--yellow {
