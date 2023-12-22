@@ -29,7 +29,7 @@
   }
 
   &__arrow {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 32px;
@@ -38,8 +38,8 @@
     background-color: $white;
     transition: all 0.3s ease;
 
-    @include onTablet {
-      display: flex;
+    @include onMobile {
+      display: none;
     }
 
     &:hover {
