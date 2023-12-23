@@ -27,10 +27,6 @@ export const TabletsPage = () => {
     isLoading,
     tablets,
     isError,
-    prevSearch,
-    setPrevSearch,
-    prevLocation,
-    setPrevLocation,
   } = useProducts();
   const sortedTablets = SortProducts(tablets, sort, query);
   const totalLength = sortedTablets.length;
@@ -70,28 +66,13 @@ export const TabletsPage = () => {
     if (query) {
       setSearchParams(getSearchWith(searchParams, { page: null }));
     }
-
-    if (!query && sort === prevSearch.sort && perPage === prevSearch.perPage) {
-      setSearchParams(getSearchWith(
-        searchParams, { page: prevSearch.page.toString() },
-      ));
-    }
-  }, [query, sort, perPage]);
+  }, [query]);
 
   useEffect(() => {
-    if (!query) {
-      setPrevSearch({ page, sort, perPage });
-    }
-  }, [query, sort, perPage, page]);
-
-  useEffect(() => {
-    if (prevLocation.includes('tablets') || !prevLocation) {
-      setPrevLocation('tablets');
-    } else {
-      setSearchParams(getSearchWith(searchParams, { page: null }));
-      setPrevLocation('tablets');
-    }
-  }, [prevLocation]);
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <section className="page">

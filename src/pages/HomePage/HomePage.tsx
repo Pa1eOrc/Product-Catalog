@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Banner } from '../../comonents/Banner';
 import { BrandNew } from '../../comonents/BrandNew';
 import { Category } from '../../comonents/Category';
@@ -9,11 +8,7 @@ import { useProducts } from '../../comonents/ProductContext';
 import './HomePage.scss';
 
 export const HomePage = () => {
-  const { isLoading, isError, setPrevLocation } = useProducts();
-
-  useEffect(() => {
-    setPrevLocation('home');
-  }, []);
+  const { isLoading, isError } = useProducts();
 
   return (
     <main className="home-page">

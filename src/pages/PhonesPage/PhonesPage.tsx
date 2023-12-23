@@ -27,10 +27,6 @@ export const PhonesPage = () => {
     isLoading,
     phones,
     isError,
-    prevSearch,
-    setPrevSearch,
-    prevLocation,
-    setPrevLocation,
   } = useProducts();
   const sortedPhones = SortProducts(phones, sort, query);
   const totalLength = sortedPhones.length;
@@ -70,28 +66,13 @@ export const PhonesPage = () => {
     if (query) {
       setSearchParams(getSearchWith(searchParams, { page: null }));
     }
-
-    if (!query && sort === prevSearch.sort && perPage === prevSearch.perPage) {
-      setSearchParams(getSearchWith(
-        searchParams, { page: prevSearch.page.toString() },
-      ));
-    }
-  }, [query, sort, perPage]);
+  }, [query]);
 
   useEffect(() => {
-    if (!query) {
-      setPrevSearch({ page, sort, perPage });
-    }
-  }, [query, sort, perPage, page]);
-
-  useEffect(() => {
-    if (prevLocation.includes('phones') || !prevLocation) {
-      setPrevLocation('phones');
-    } else {
-      setSearchParams(getSearchWith(searchParams, { page: null }));
-      setPrevLocation('phones');
-    }
-  }, [prevLocation]);
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <section className="page">

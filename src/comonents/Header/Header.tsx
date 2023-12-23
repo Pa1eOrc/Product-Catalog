@@ -94,6 +94,7 @@ export const Header = () => {
           className="header__menu-button"
           title="menu"
           onClick={handleMenuClick}
+          onBlur={handleMenuClick}
         >
           <span className={classNames(
             'icon',

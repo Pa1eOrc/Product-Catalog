@@ -27,10 +27,6 @@ export const AccessoriesPage = () => {
     isLoading,
     accessories,
     isError,
-    prevSearch,
-    setPrevSearch,
-    prevLocation,
-    setPrevLocation,
   } = useProducts();
   const sortedAccessories = SortProducts(accessories, sort, query);
   const totalLength = sortedAccessories.length;
@@ -70,28 +66,13 @@ export const AccessoriesPage = () => {
     if (query) {
       setSearchParams(getSearchWith(searchParams, { page: null }));
     }
-
-    if (!query && sort === prevSearch.sort && perPage === prevSearch.perPage) {
-      setSearchParams(getSearchWith(
-        searchParams, { page: prevSearch.page.toString() },
-      ));
-    }
-  }, [query, sort, perPage]);
+  }, [query]);
 
   useEffect(() => {
-    if (!query) {
-      setPrevSearch({ page, sort, perPage });
-    }
-  }, [query, sort, perPage, page]);
-
-  useEffect(() => {
-    if (prevLocation.includes('accessories') || !prevLocation) {
-      setPrevLocation('accessories');
-    } else {
-      setSearchParams(getSearchWith(searchParams, { page: null }));
-      setPrevLocation('accessories');
-    }
-  }, [prevLocation]);
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <section className="page">

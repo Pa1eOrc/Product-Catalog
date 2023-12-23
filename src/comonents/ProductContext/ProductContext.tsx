@@ -51,22 +51,10 @@ type ProductsContextProps = {
     productsToUpdare: Product[], productToCheck: Product) => Product[],
   isProductNotFound: boolean;
   isError: string,
-  prevSearch: {
-    sort: string,
-    page: number,
-    perPage: string,
-  },
-  setPrevSearch: (prevSearch: {
-    sort: string,
-    page: number,
-    perPage: string,
-  }) => void,
   isMessage: boolean,
   setIsMessage: (isMessage: boolean) => void,
   isMobile: boolean,
   screenWidth: number,
-  prevLocation: string,
-  setPrevLocation: (prevLocation: string) => void,
 };
 
 export const ProductsContext = React.createContext<ProductsContextProps>({
@@ -141,18 +129,10 @@ export const ProductsContext = React.createContext<ProductsContextProps>({
   getArrayUpdates: () => [],
   isProductNotFound: false,
   isError: '',
-  prevSearch: {
-    sort: '',
-    page: 1,
-    perPage: '',
-  },
-  setPrevSearch: () => { },
   isMessage: false,
   setIsMessage: () => {},
   isMobile: false,
   screenWidth: 1040,
-  prevLocation: '',
-  setPrevLocation: () => {},
 });
 
 export const ProductsProvider: React.FC<Props> = ({ children }) => {
@@ -304,12 +284,6 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
   const perPage = searchParams.get('perPage') || '16';
   const query = searchParams.get('query') || '';
   const itemsPerPage = 4;
-  const [prevSearch, setPrevSearch] = useState({
-    sort: '',
-    page: 1,
-    perPage: '',
-  });
-  const [prevLocation, setPrevLocation] = useState('');
 
   function getArrayLength(array: Product[]) {
     return array.length - itemsPerPage;
@@ -405,14 +379,10 @@ export const ProductsProvider: React.FC<Props> = ({ children }) => {
     getArrayUpdates,
     isProductNotFound,
     isError,
-    prevSearch,
-    setPrevSearch,
     isMessage,
     setIsMessage,
     isMobile,
     screenWidth,
-    prevLocation,
-    setPrevLocation,
   };
 
   return (
