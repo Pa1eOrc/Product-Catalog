@@ -25,6 +25,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
+    transition: all 0.2s ease-in-out;
     border: 1px solid $elements;
     background-color: $white;
 
@@ -112,11 +113,16 @@
     &--skyblue {
       background-color: #87ceeb;
     }
+
+    &--midnight {
+      background-color: #000e34;
+    }
   }
 
   &__capacity {
     background-color: $white;
     color: $primary;
+    transition: all 0.2s ease-in-out;
 
     text-transform: uppercase;
     padding: 7px 8px 4px;
