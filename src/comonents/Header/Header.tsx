@@ -84,7 +84,7 @@ export const Header = () => {
           to="/"
           title="Back to home page"
           className="header__logo"
-          onClick={handleMenuClick}
+          onClick={() => setIsMenu(false)}
         >
           <span className="icon icon--logo" />
         </NavLink>
@@ -114,7 +114,7 @@ export const Header = () => {
           <NavLink
             to="/"
             className={getLinkClass}
-            onClick={handleMenuClick}
+            onClick={() => setIsMenu(false)}
           >
             <p className="navbar__item navbar__item--link">
               Home
@@ -124,7 +124,7 @@ export const Header = () => {
           <NavLink
             to="/phones"
             className={getLinkClass}
-            onClick={handleMenuClick}
+            onClick={() => setIsMenu(false)}
           >
             <p className="navbar__item navbar__item--link">
               Phones
@@ -134,7 +134,7 @@ export const Header = () => {
           <NavLink
             to="/tablets"
             className={getLinkClass}
-            onClick={handleMenuClick}
+            onClick={() => setIsMenu(false)}
           >
             <p className="navbar__item navbar__item--link">
               Tablets
@@ -144,7 +144,7 @@ export const Header = () => {
           <NavLink
             to="/accessories"
             className={getLinkClass}
-            onClick={handleMenuClick}
+            onClick={() => setIsMenu(false)}
           >
             <p className="navbar__item navbar__item--link">
               Accessories
@@ -185,7 +185,7 @@ export const Header = () => {
           <NavLink
             to="/favourites"
             className={getLinkClass}
-            onClick={handleMenuClick}
+            onClick={() => setIsMenu(false)}
           >
             <div className="navbar__item navbar__item--icon">
               <span className="icon icon--favourites" />
@@ -200,7 +200,7 @@ export const Header = () => {
           <NavLink
             to="/cart"
             className={getLinkClass}
-            onClick={handleMenuClick}
+            onClick={() => setIsMenu(false)}
           >
             <div className="navbar__item navbar__item--icon">
               <span className="icon icon--cart" />
