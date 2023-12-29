@@ -1,5 +1,4 @@
-// eslint-disable-next-line max-len
-const BASE_URL = 'https://pa1eorc.github.io/Product-Catalog/api/';
+const BASE_URL = 'https://Pa1eOrc.github.io/product_catalog/api/';
 
 function wait(delay: number) {
   return new Promise(resolve => {

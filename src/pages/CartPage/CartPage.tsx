@@ -14,7 +14,6 @@ export const CartPage = () => {
   const { carts } = useProducts();
   const filteredCarts = getFilteredCarts(carts);
   const totalPrice = getTotalPrice(carts);
-  // const [isMessage, setIsMessage] = useState(false);
 
   const handleCartAction = (
     id: string, action: 'add' | 'delete' | 'deleteAll',
